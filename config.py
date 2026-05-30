@@ -1,20 +1,15 @@
 # ============================================================
 #  CONFIGURACIÓN DE TEMAS — EDITÁ SOLO ESTE ARCHIVO
-#  Cada tecla (1-5) del ESP32 corresponde a una clave aquí.
-#  Cambiá "nombre" y "ejemplo" sin tocar nada más.
+#  Teclas 1-5: temas fijos de cálculo actuarial
+#  Tecla 6:    tema libre — cambialo cuando quieras
 # ============================================================
 
-# Prompt base que siempre se envía a la IA
-# Podés modificarlo para cambiar el tono o el idioma de respuesta
 PROMPT_BASE = (
     "Sos un asistente especializado en cálculos actuariales. "
     "Respondé siempre en español, de forma clara y concisa. "
     "Si hay ejercicios o fórmulas en la imagen, resolvelos paso a paso."
 )
 
-# Temas asociados a las teclas 1-5
-# "nombre": descripción corta del tema
-# "ejemplo": ejemplo de ejercicio que guía a la IA sobre qué tipo de respuesta dar
 TEMAS = {
     "1": {
         "nombre": "Interés compuesto y valor del dinero en el tiempo",
@@ -55,4 +50,15 @@ TEMAS = {
             "tasa de interés 4% y tabla de mortalidad estándar."
         )
     },
+
+    # ── Tema libre — cambiá esto cuando quieras ──────────────
+    # No necesitás tocar el ESP32 ni la Casio, solo este bloque
+    "6": {
+        "nombre": "Tema libre",
+        "ejemplo": (
+            "Analizá la imagen y describí detalladamente lo que ves. "
+            "Si hay texto, transcribilo. Si hay fórmulas, identificalas."
+        )
+    },
 }
+
