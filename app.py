@@ -24,7 +24,7 @@ def analizar_imagen(imagen_bytes, tema_key=None):
         prompt = f"{PROMPT_BASE}\n\nAnalizá la imagen y describí lo que ves de forma clara y concisa."
 
     mensaje = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-haiku-4-5-20251001",
         max_tokens=1024,
         messages=[{
             "role": "user",
