@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import anthropic
 import base64
 import os
@@ -9,16 +9,14 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
 # Memoria temporal por sesión
 sesiones = {}
+ultima_foto_bytes = None  # guarda la ultima foto recibida
 
 def dividir_en_bloques(texto, tam=130):
-    """Divide el texto en bloques de 'tam' caracteres"""
     return [texto[i:i+tam] for i in range(0, len(texto), tam)]
 
 def analizar_imagen(imagen_bytes, tema_key=None):
-    """Envía imagen + prompt a Claude y retorna la respuesta"""
     imagen_b64 = base64.standard_b64encode(imagen_bytes).decode("utf-8")
 
-    # Construir prompt según si se eligió tema o no
     if tema_key and tema_key in TEMAS:
         tema = TEMAS[tema_key]
         prompt = f"{PROMPT_BASE}\n\nTema solicitado: {tema['nombre']}\n\nEjemplo de referencia:\n{tema['ejemplo']}\n\nAhora analizá la imagen y respondé en base a ese tema."
@@ -51,14 +49,14 @@ def analizar_imagen(imagen_bytes, tema_key=None):
 
 @app.route("/foto", methods=["POST"])
 def recibir_foto():
-    """
-    Recibe la foto del ESP32.
-    Parámetro opcional en header: X-Tema (1-5)
-    """
+    global ultima_foto_bytes
+
     if not request.data:
         return jsonify({"error": "Sin datos"}), 400
 
-    # Leer tema si fue enviado (header X-Tema: 1, 2, 3, 4 o 5)
+    # Guardar la foto para verla despues
+    ultima_foto_bytes = request.data
+
     tema_key = request.headers.get("X-Tema", None)
 
     try:
@@ -67,22 +65,38 @@ def recibir_foto():
 
         sesiones["esp32"] = {
             "bloques": bloques,
-            "total": len(bloques)
+            "total": len(bloques),
+            "ultimo_resultado": resultado
         }
 
         return jsonify({
             "bloque": 0,
             "total": len(bloques),
-            "texto": bloques[0]
+            "texto": resultado  # mandamos todo el texto, no solo el primer bloque
         }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/ultima-foto")
+def ver_ultima_foto():
+    """Mostra la ultima foto recibida del ESP32 en el browser"""
+    if ultima_foto_bytes is None:
+        return "No hay fotos recibidas aun.", 404
+    return Response(ultima_foto_bytes, mimetype="image/jpeg")
+
+
+@app.route("/ultimo-resultado")
+def ver_ultimo_resultado():
+    """Muestra el ultimo texto que devolvio Claude"""
+    if "esp32" not in sesiones:
+        return "Sin resultados aun.", 404
+    return sesiones["esp32"]["ultimo_resultado"], 200
+
+
 @app.route("/bloque/<int:numero>", methods=["GET"])
 def obtener_bloque(numero):
-    """Retorna un bloque específico de la última respuesta"""
     if "esp32" not in sesiones:
         return jsonify({"error": "Sin sesion activa"}), 404
 
@@ -100,7 +114,6 @@ def obtener_bloque(numero):
 
 @app.route("/temas", methods=["GET"])
 def listar_temas():
-    """Endpoint de diagnóstico: muestra los temas configurados"""
     return jsonify({k: v["nombre"] for k, v in TEMAS.items()}), 200
 
 
@@ -108,7 +121,14 @@ def listar_temas():
 def index():
     fotos = sesiones.get("esp32", {})
     total = fotos.get("total", 0)
-    return f"Servidor activo. Bloques en memoria: {total}. Temas: {list(TEMAS.keys())}"
+    foto_link = '<a href="/ultima-foto">Ver ultima foto</a>' if ultima_foto_bytes else "Sin fotos aun"
+    resultado_link = '<a href="/ultimo-resultado">Ver ultimo resultado</a>' if total > 0 else "Sin resultados aun"
+    return f"""
+    <h2>Servidor activo</h2>
+    <p>{foto_link}</p>
+    <p>{resultado_link}</p>
+    <p>Bloques en memoria: {total}</p>
+    """
 
 
 if __name__ == "__main__":
