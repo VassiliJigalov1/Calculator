@@ -29,8 +29,8 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     content.append({"type": "text", "text": prompt})
  
     mensaje = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=600,
+        model="claude-opus-4-8",
+        max_tokens=8000,
         messages=[{"role": "user", "content": content}]
     )
     return mensaje.content[0].text
