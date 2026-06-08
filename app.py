@@ -10,23 +10,19 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 sesiones = {}
 ultima_foto_bytes = None
  
- 
-def analizar_imagenes(fotos_b64, tema_key=None):
+def analizar_imagenes(fotos_bytes, tema_key=None):
     if tema_key and tema_key in TEMAS:
         tema = TEMAS[tema_key]
-        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}\n\nTenes 3 fotos de la misma imagen tomadas en distintos momentos. Usa la mas nitida para responder."
+        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}\n\nTenes 3 fotos de la misma imagen. Usa la mas nitida para responder."
     else:
         prompt = f"{PROMPT_CALCULADORA}\n\nTenes 3 fotos de la misma imagen. Usa la mas nitida y describe lo que ves."
  
     content = []
-    for b64 in fotos_b64:
+    for foto in fotos_bytes:
+        b64 = base64.standard_b64encode(foto).decode("utf-8")
         content.append({
             "type": "image",
-            "source": {
-                "type": "base64",
-                "media_type": "image/jpeg",
-                "data": b64,
-            }
+            "source": {"type": "base64", "media_type": "image/jpeg", "data": b64}
         })
     content.append({"type": "text", "text": prompt})
  
@@ -44,25 +40,23 @@ def recibir_foto():
  
     content_type = request.headers.get("Content-Type", "")
  
-    # Modo 3 fotos (JSON con base64)
-    if "application/json" in content_type:
-        body = request.get_json()
-        if not body:
-            return jsonify({"error": "Sin datos"}), 400
- 
-        tema_key = body.get("tema", None)
-        foto1 = body.get("foto1")
-        foto2 = body.get("foto2")
-        foto3 = body.get("foto3")
+    # Modo 3 fotos (multipart)
+    if "multipart/form-data" in content_type:
+        foto1 = request.files.get("foto1")
+        foto2 = request.files.get("foto2")
+        foto3 = request.files.get("foto3")
  
         if not foto1 or not foto2 or not foto3:
             return jsonify({"error": "Faltan fotos"}), 400
  
-        # guardar ultima foto para ver en browser
-        ultima_foto_bytes = base64.b64decode(foto3)
+        bytes1 = foto1.read()
+        bytes2 = foto2.read()
+        bytes3 = foto3.read()
+        ultima_foto_bytes = bytes3
+        tema_key = request.headers.get("X-Tema", None)
  
         try:
-            resultado = analizar_imagenes([foto1, foto2, foto3], tema_key)
+            resultado = analizar_imagenes([bytes1, bytes2, bytes3], tema_key)
             sesiones["esp32"] = {"ultimo_resultado": resultado}
             return jsonify({"texto": resultado}), 200
         except Exception as e:
@@ -75,10 +69,9 @@ def recibir_foto():
  
         ultima_foto_bytes = request.data
         tema_key = request.headers.get("X-Tema", None)
-        imagen_b64 = base64.standard_b64encode(request.data).decode("utf-8")
  
         try:
-            resultado = analizar_imagenes([imagen_b64], tema_key)
+            resultado = analizar_imagenes([request.data], tema_key)
             sesiones["esp32"] = {"ultimo_resultado": resultado}
             return jsonify({"texto": resultado}), 200
         except Exception as e:
@@ -99,7 +92,7 @@ def ver_ultimo_resultado():
     return sesiones["esp32"]["ultimo_resultado"], 200
  
  
-@app.route("/temas", methods=["GET"])
+@app.route("/temas")
 def listar_temas():
     return jsonify({k: v["nombre"] for k, v in TEMAS.items()}), 200
  
@@ -108,11 +101,7 @@ def listar_temas():
 def index():
     foto_link = '<a href="/ultima-foto">Ver ultima foto</a>' if ultima_foto_bytes else "Sin fotos aun"
     resultado_link = '<a href="/ultimo-resultado">Ver ultimo resultado</a>' if "esp32" in sesiones else "Sin resultados aun"
-    return f"""
-    <h2>Servidor activo</h2>
-    <p>{foto_link}</p>
-    <p>{resultado_link}</p>
-    """
+    return f"<h2>Servidor activo</h2><p>{foto_link}</p><p>{resultado_link}</p>"
  
  
 if __name__ == "__main__":
