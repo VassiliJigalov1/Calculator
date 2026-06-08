@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Response
 import anthropic
 import base64
 import os
-from config import TEMAS, PROMPT_BASE
+from config import TEMAS, PROMPT_BASE, PROMPT_CALCULADORA
  
 app = Flask(__name__)
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
@@ -10,11 +10,6 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 sesiones = {}
 ultima_foto_bytes = None
  
-PROMPT_CALCULADORA = (
-    "Respondé en español, sin markdown, sin asteriscos, sin guiones, sin titulos. "
-    "Texto plano solamente. Maximo 500 caracteres. "
-    "Respondé de forma directa y concisa como si fuera para una pantalla muy pequeña."
-)
  
 def analizar_imagenes(fotos_b64, tema_key=None):
     if tema_key and tema_key in TEMAS:
