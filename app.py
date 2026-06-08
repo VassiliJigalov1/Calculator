@@ -1,3 +1,4 @@
+
 from flask import Flask, request, jsonify, Response
 import anthropic
 import base64
@@ -13,7 +14,8 @@ ultima_foto_bytes = None
 def analizar_imagenes(fotos_bytes, tema_key=None):
     if tema_key and tema_key in TEMAS:
         tema = TEMAS[tema_key]
-        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}"
+        ejemplo = tema.get('ejemplo', '')  # fix: no explota si falta "ejemplo"
+        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{ejemplo}"
     else:
         prompt = f"{PROMPT_CALCULADORA}"
  
@@ -27,7 +29,7 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     content.append({"type": "text", "text": prompt})
  
     mensaje = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-haiku-4-5-20251001",
         max_tokens=600,
         messages=[{"role": "user", "content": content}]
     )
