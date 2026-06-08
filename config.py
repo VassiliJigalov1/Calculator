@@ -53,10 +53,6 @@ TEMAS = {
         )
     },
     "6": {
-        "nombre": "Tema libre",
-        "ejemplo": (
-            "Analiza la imagen y describe detalladamente lo que ves. "
-            "Si hay texto, transcribilo. Si hay formulas, identificalas."
-        )
+        "nombre": "Tema libre"
     },
 }
