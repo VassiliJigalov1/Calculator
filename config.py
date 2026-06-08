@@ -2,15 +2,16 @@
 #  CONFIGURACIÓN DE TEMAS — EDITÁ SOLO ESTE ARCHIVO
 # ============================================================
  
-PROMPT_CALCULADORA = (
- Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
- Reglas:
- - Nunca uses más de 16 caracteres por línea (contando espacios)
- - Cada página tiene exactamente 7 líneas (completá con líneas vacías si es necesario)
- - Separá las páginas con una línea que diga exactamente: ---
- - Usá abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
- - Nunca uses palabras largas: usá * en vez de "por", = en vez de "igual a"
-)
+PROPROMPT_CALCULADORA = """
+Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
+Reglas:
+- Nunca uses mas de 16 caracteres por linea (contando espacios)
+- Cada pagina tiene exactamente 7 lineas (completa con lineas vacias si es necesario)
+- Separa las paginas con una linea que diga exactamente: ---
+- Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
+- Nunca uses palabras largas: usa * en vez de "por", = en vez de "igual a"
+- Los numeros largos cortalos: 5333333.3 en vez de 5333333.33
+"""
  
 TEMAS = {
     "1": {
