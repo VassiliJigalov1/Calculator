@@ -2,9 +2,11 @@
 #  CONFIGURACIÓN DE TEMAS — EDITÁ SOLO ESTE ARCHIVO
 # ============================================================
  
-PROPROMPT_CALCULADORA = """
+PROMPT_CALCULADORA = """
 Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
 Reglas:
+- Usar ^2 para potencia al caudrado, tene encuenta que el texto se mostrara en calculadora ti-84
+- no usar simbolos de desviacion ni cualquier otra cosa que no muestre la calculadora
 - Nunca uses mas de 16 caracteres por linea (contando espacios)
 - Cada pagina tiene exactamente 7 lineas (completa con lineas vacias si es necesario)
 - Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
