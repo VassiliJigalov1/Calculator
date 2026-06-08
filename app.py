@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Response
 import anthropic
 import base64
 import os
-from config import TEMAS, PROMPT_BASE, PROMPT_CALCULADORA
+from config import TEMAS, PROMPT_CALCULADORA
  
 app = Flask(__name__)
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
@@ -13,9 +13,9 @@ ultima_foto_bytes = None
 def analizar_imagenes(fotos_bytes, tema_key=None):
     if tema_key and tema_key in TEMAS:
         tema = TEMAS[tema_key]
-        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}\n\nTenes 3 fotos de la misma imagen. Usa la mas nitida para responder."
+        prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}"
     else:
-        prompt = f"{PROMPT_CALCULADORA}\n\nTenes 3 fotos de la misma imagen. Usa la mas nitida y describe lo que ves."
+        prompt = f"{PROMPT_CALCULADORA}\n\nAnaliza la imagen y describe lo que ves."
  
     content = []
     for foto in fotos_bytes:
@@ -40,7 +40,6 @@ def recibir_foto():
  
     content_type = request.headers.get("Content-Type", "")
  
-    # Modo 3 fotos (multipart)
     if "multipart/form-data" in content_type:
         foto1 = request.files.get("foto1")
         foto2 = request.files.get("foto2")
@@ -62,7 +61,6 @@ def recibir_foto():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
  
-    # Modo foto simple (jpeg directo)
     else:
         if not request.data:
             return jsonify({"error": "Sin datos"}), 400
