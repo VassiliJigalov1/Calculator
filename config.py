@@ -1,12 +1,9 @@
-# ============================================================
-#  CONFIGURACIÓN DE TEMAS — EDITÁ SOLO ESTE ARCHIVO
-# ============================================================
- 
+
 PROMPT_CALCULADORA = """
 Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
 Reglas:
 - Nunca uses mas de 16 caracteres por linea (contando espacios)
-- No hagas espacio entre lineas
+- No hagas espacio entre lineas ni demarques cada bloque con ningun caracter, escribelos uno abajo del otro
 - no escribas pagina 1,2,3,etc., ni marques cada linea, solo escribelo por bloques
 - Cada pagina tiene exactamente 7 lineas (completa con lineas vacias si es necesario)
 - Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
