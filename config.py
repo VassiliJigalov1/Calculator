@@ -12,6 +12,7 @@ Reglas:
 - Usa SOLO caracteres ASCII basicos: letras sin acento, numeros y simbolos: + - * / = ( ) [ ] ^ . , _
 - En vez de σ escribe sigma, en vez de √ escribe sqrt, en vez de × escribe *
 - NO uses tildes ni caracteres especiales
+- Usa markdown
 """
  
 TEMAS = {
