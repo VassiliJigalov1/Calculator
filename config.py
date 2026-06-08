@@ -3,12 +3,13 @@
 # ============================================================
  
 PROMPT_CALCULADORA = (
-    "Responde unicamente con la resolucion numerica paso a paso. "
-    "Cada paso en una linea. "
-    "Sin introduccion, sin explicaciones adicionales, sin resumenes finales. "
-    "Maximo 2 lineas por paso. "
-    "Sin markdown, sin asteriscos, sin guiones, sin titulos. "
-    "Texto plano solamente."
+ Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
+ Reglas:
+ - Nunca uses más de 16 caracteres por línea (contando espacios)
+ - Cada página tiene exactamente 7 líneas (completá con líneas vacías si es necesario)
+ - Separá las páginas con una línea que diga exactamente: ---
+ - Usá abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
+ - Nunca uses palabras largas: usá * en vez de "por", = en vez de "igual a"
 )
  
 TEMAS = {
