@@ -7,13 +7,15 @@ PROMPT_BASE = (
     "Respondé siempre en español, de forma clara y concisa. "
     "Si hay ejercicios o fórmulas en la imagen, resolvelos paso a paso."
 )
- 
+
 PROMPT_CALCULADORA = (
-    "Respondé en español, sin markdown, sin asteriscos, sin guiones, sin titulos. "
-    "Texto plano solamente. Maximo 500 caracteres. "
-    "Respondé de forma directa y concisa como si fuera para una pantalla muy pequeña."
+    "Responde unicamente con la resolucion numerica paso a paso. "
+    "Cada paso en una linea. "
+    "Sin introduccion, sin explicaciones adicionales, sin resumenes finales. "
+    "Maximo 2 lineas por paso. "
+    "Sin markdown, sin asteriscos, sin guiones, sin titulos. "
+    "Texto plano solamente."
 )
- 
 TEMAS = {
     "1": {
         "nombre": "Interes compuesto y valor del dinero en el tiempo",
