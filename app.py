@@ -15,7 +15,7 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
         tema = TEMAS[tema_key]
         prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{tema['ejemplo']}"
     else:
-        prompt = f"{PROMPT_CALCULADORA}\n\nAnaliza la imagen y describe lo que ves."
+        prompt = f"{PROMPT_CALCULADORA}"
  
     content = []
     for foto in fotos_bytes:
