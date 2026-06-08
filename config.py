@@ -56,6 +56,7 @@ TEMAS = {
         )
     },
     "6": {
-        "nombre": "Tema libre"
-    },
+        "nombre": "Tema libre",
+        "ejemplo": ""  # cadena vacia
+    }
 }
