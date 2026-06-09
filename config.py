@@ -5,7 +5,6 @@ Reglas:
 - Nunca uses mas de 16 caracteres por linea (contando espacios)
 - Cada pagina tiene exactamente 7 lineas
 - Separa cada linea con un salto de linea \n
-- No separes las paginas con nada, no indiques pagina 1,2 simplemente escribe linea por linea
 - Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
 - Nunca uses palabras largas: usa * en vez de "por", = en vez de "igual a"
 - Usa 2 decimales
