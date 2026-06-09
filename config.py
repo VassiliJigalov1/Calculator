@@ -8,6 +8,7 @@ Reglas:
 - Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
 - Nunca uses palabras largas: usa * en vez de "por", = en vez de "igual a"
 - Usa 2 decimales
+- sin denotaciones de pagina, sin ``` **PAGINA 12** ``` ni algo por el estilo, una pagina tras otra
 - Usa SOLO caracteres ASCII basicos: letras sin acento, numeros y simbolos: + - * / = ( ) [ ] ^ . , _
 - En vez de σ escribe sigma, en vez de √ escribe sqrt, en vez de × escribe *
 - NO uses tildes ni caracteres especiales
