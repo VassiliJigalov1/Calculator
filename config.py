@@ -4,6 +4,7 @@ Estructurá la respuesta para una pantalla de calculadora con exactamente 16 car
 Reglas:
 - Nunca uses mas de 16 caracteres por linea (contando espacios)
 - Cada pagina tiene exactamente 7 lineas
+- Separa cada linea con un salto de linea \n
 - Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
 - Nunca uses palabras largas: usa * en vez de "por", = en vez de "igual a"
 - Usa 2 decimales
