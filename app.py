@@ -1,7 +1,7 @@
-
 from flask import Flask, request, jsonify, Response
 import anthropic
 import base64
+import re
 import os
 from config import TEMAS, PROMPT_CALCULADORA
  
@@ -11,10 +11,18 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 sesiones = {}
 ultima_foto_bytes = None
  
+ 
+def parsear_paginas(texto):
+    """Extrae el contenido de cada bloque ```...``` y devuelve una lista de strings."""
+    patron = r'```([\s\S]*?)```'
+    paginas = re.findall(patron, texto)
+    return [p.strip() for p in paginas if p.strip()]
+ 
+ 
 def analizar_imagenes(fotos_bytes, tema_key=None):
     if tema_key and tema_key in TEMAS:
         tema = TEMAS[tema_key]
-        ejemplo = tema.get('ejemplo', '')  # fix: no explota si falta "ejemplo"
+        ejemplo = tema.get('ejemplo', '')
         prompt = f"{PROMPT_CALCULADORA}\n\nTema: {tema['nombre']}\n\n{ejemplo}"
     else:
         prompt = f"{PROMPT_CALCULADORA}"
@@ -57,9 +65,17 @@ def recibir_foto():
         tema_key = request.headers.get("X-Tema", None)
  
         try:
-            resultado = analizar_imagenes([bytes1, bytes2, bytes3], tema_key)
-            sesiones["esp32"] = {"ultimo_resultado": resultado}
-            return jsonify({"texto": resultado}), 200
+            resultado_raw = analizar_imagenes([bytes1, bytes2, bytes3], tema_key)
+            paginas = parsear_paginas(resultado_raw)
+            sesiones["esp32"] = {
+                "ultimo_resultado": resultado_raw,
+                "paginas": paginas
+            }
+            return jsonify({
+                "texto": resultado_raw,
+                "paginas": paginas,
+                "total_paginas": len(paginas)
+            }), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
  
@@ -71,9 +87,17 @@ def recibir_foto():
         tema_key = request.headers.get("X-Tema", None)
  
         try:
-            resultado = analizar_imagenes([request.data], tema_key)
-            sesiones["esp32"] = {"ultimo_resultado": resultado}
-            return jsonify({"texto": resultado}), 200
+            resultado_raw = analizar_imagenes([request.data], tema_key)
+            paginas = parsear_paginas(resultado_raw)
+            sesiones["esp32"] = {
+                "ultimo_resultado": resultado_raw,
+                "paginas": paginas
+            }
+            return jsonify({
+                "texto": resultado_raw,
+                "paginas": paginas,
+                "total_paginas": len(paginas)
+            }), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
  
@@ -92,6 +116,35 @@ def ver_ultimo_resultado():
     return sesiones["esp32"]["ultimo_resultado"], 200
  
  
+@app.route("/paginas")
+def ver_paginas():
+    """Devuelve las paginas parseadas como JSON."""
+    if "esp32" not in sesiones:
+        return jsonify({"error": "Sin resultados aun."}), 404
+    paginas = sesiones["esp32"].get("paginas", [])
+    return jsonify({
+        "paginas": paginas,
+        "total_paginas": len(paginas)
+    }), 200
+ 
+ 
+@app.route("/paginas/<int:numero>")
+def ver_pagina(numero):
+    """Devuelve una pagina especifica (base 1)."""
+    if "esp32" not in sesiones:
+        return jsonify({"error": "Sin resultados aun."}), 404
+    paginas = sesiones["esp32"].get("paginas", [])
+    if numero < 1 or numero > len(paginas):
+        return jsonify({
+            "error": f"Pagina {numero} no existe. Total: {len(paginas)}"
+        }), 404
+    return jsonify({
+        "pagina": numero,
+        "total_paginas": len(paginas),
+        "contenido": paginas[numero - 1]
+    }), 200
+ 
+ 
 @app.route("/temas")
 def listar_temas():
     return jsonify({k: v["nombre"] for k, v in TEMAS.items()}), 200
@@ -101,7 +154,13 @@ def listar_temas():
 def index():
     foto_link = '<a href="/ultima-foto">Ver ultima foto</a>' if ultima_foto_bytes else "Sin fotos aun"
     resultado_link = '<a href="/ultimo-resultado">Ver ultimo resultado</a>' if "esp32" in sesiones else "Sin resultados aun"
-    return f"<h2>Servidor activo</h2><p>{foto_link}</p><p>{resultado_link}</p>"
+    paginas_link = '<a href="/paginas">Ver paginas JSON</a>' if "esp32" in sesiones else ""
+    return (
+        f"<h2>Servidor activo</h2>"
+        f"<p>{foto_link}</p>"
+        f"<p>{resultado_link}</p>"
+        f"<p>{paginas_link}</p>"
+    )
  
  
 if __name__ == "__main__":
