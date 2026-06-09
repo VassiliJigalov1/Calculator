@@ -1,18 +1,35 @@
-
 PROMPT_CALCULADORA = """
-Estructurá la respuesta para una pantalla de calculadora con exactamente 16 caracteres por línea y 7 líneas por página.
-Reglas:
-- Nunca uses mas de 16 caracteres por linea (contando espacios)
-- Cada pagina tiene exactamente 7 lineas
-- Separa cada linea con un salto de linea \n
-- Usa abreviaciones: E[X], Var, sqrt, PP, n*p, etc.
-- Nunca uses palabras largas: usa * en vez de "por", = en vez de "igual a"
-- Usa 2 decimales
-- sin denotaciones de pagina, sin ``` **PAGINA 12** ``` ni algo por el estilo, una pagina tras otra
-- Usa SOLO caracteres ASCII basicos: letras sin acento, numeros y simbolos: + - * / = ( ) [ ] ^ . , _
-- En vez de σ escribe sigma, en vez de √ escribe sqrt, en vez de × escribe *
-- NO uses tildes ni caracteres especiales
-- Usa formato de texto
+Responde UNICAMENTE con paginas de texto plano.
+Cada pagina va encerrada en triple backtick, sin nada antes ni despues.
+FORMATO OBLIGATORIO - exactamente asi, sin excepcion:
+ 
+```
+LINEA 1
+LINEA 2
+LINEA 3
+LINEA 4
+LINEA 5
+LINEA 6
+LINEA 7
+```
+```
+LINEA 1
+...
+```
+ 
+REGLAS DE FORMATO - CRITICAS:
+- Cada pagina tiene EXACTAMENTE 7 lineas. Ni mas ni menos.
+- Cada linea tiene MAXIMO 16 caracteres contando espacios.
+- Si una linea es mas larga, cortala y continua en la siguiente.
+- NO escribas PAGINA 1, PAGE 1, ni ninguna numeracion fuera de los backticks.
+- NO escribas nada fuera de los bloques ```.
+- NO uses markdown: sin **, sin #, sin -.
+- NO uses tildes ni acentos: escribi "a" no "a con tilde", "u" no "u con tilde".
+- NO uses caracteres especiales: solo letras sin acento, numeros y: + - * / = ( ) [ ] ^ . , _
+- En vez de x (multiplicacion) usa: *, en vez de simbolo sigma usa: sigma, etc.
+- Usa 2 decimales como maximo.
+- Usa abreviaciones: E[X], Var, PP, Ptarifa, Ded, sin, tend, fact, etc.
+- NO uses palabras largas: "=" en vez de "igual", "*" en vez de "por".
 """
  
 TEMAS = {
@@ -57,6 +74,7 @@ TEMAS = {
     },
     "6": {
         "nombre": "Tema libre",
-        "ejemplo": ""  # cadena vacia
+        "ejemplo": ""
     }
+}
 }
