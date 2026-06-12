@@ -1,5 +1,5 @@
 PROMPT_CALCULADORA = """
-
+Resuelve,
 REGLAS DE FORMATO:
 - Escribe en lineas, cada linea tiene MAXIMO 16 caracteres contando espacios.
 - NO uses tildes ni acentos: escribi "a" no "a con tilde", "u" no "u con tilde".
