@@ -1,6 +1,5 @@
 PROMPT_CALCULADORA = """
-El resultado sera mandado a un calculadora ti-84, asique sigue las reglas de formato:
- 
+
 REGLAS DE FORMATO:
 - Escribe en lineas, cada linea tiene MAXIMO 16 caracteres contando espacios.
 - NO uses tildes ni acentos: escribi "a" no "a con tilde", "u" no "u con tilde".
@@ -42,7 +41,7 @@ TEMAS = {
         )
     },
     "5": {
-        "nombre": "Reservas matematicas y primas",
+        "nombre": "",
         "ejemplo": (
             "Ejemplo: Calcula la prima nivelada anual para un seguro de vida entera "
             "emitido a una persona de 30 anos, con suma asegurada de $50.000, "
