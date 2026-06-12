@@ -52,15 +52,12 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     content.append({"type": "text", "text": prompt})
 
     mensaje = client.messages.create(
-        model="claude-fable-5",
-        max_tokens=16000,
-        effort="high",
+        model="claude-opus-4-8",
+        max_tokens=32000,
+        thinking={"type": "adaptive"},
+        effort="max",
         messages=[{"role": "user", "content": content}]
     )
-
-    # Fable 5 puede devolver stop_reason "refusal" con HTTP 200 (no es una excepcion)
-    if mensaje.stop_reason == "refusal":
-        return "El modelo se negó a responder esta solicitud (refusal)."
 
     # Concatena todos los bloques de tipo "text" de la respuesta
     textos = [block.text for block in mensaje.content if block.type == "text"]
