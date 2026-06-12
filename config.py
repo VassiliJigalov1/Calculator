@@ -1,35 +1,16 @@
 PROMPT_CALCULADORA = """
-Responde UNICAMENTE con paginas de texto plano.
-Cada pagina va encerrada en triple backtick, sin nada antes ni despues.
-FORMATO OBLIGATORIO - exactamente asi, sin excepcion:
+El resultado sera mandado a un calculadora ti-84, asique sigue las reglas de formato:
  
-```
-LINEA 1
-LINEA 2
-LINEA 3
-LINEA 4
-LINEA 5
-LINEA 6
-LINEA 7
-```
-```
-LINEA 1
-...
-```
- 
-REGLAS DE FORMATO - CRITICAS:
-- Cada pagina tiene EXACTAMENTE 7 lineas. Ni mas ni menos.
-- Cada linea tiene MAXIMO 16 caracteres contando espacios.
-- Si una linea es mas larga, cortala y continua en la siguiente.
-- NO escribas PAGINA 1, PAGE 1, ni ninguna numeracion fuera de los backticks.
-- NO escribas nada fuera de los bloques ```.
-- NO uses markdown: sin **, sin #, sin -.
+REGLAS DE FORMATO:
+- Escribe en lineas, cada linea tiene MAXIMO 16 caracteres contando espacios.
 - NO uses tildes ni acentos: escribi "a" no "a con tilde", "u" no "u con tilde".
 - NO uses caracteres especiales: solo letras sin acento, numeros y: + - * / = ( ) [ ] ^ . , _
-- En vez de x (multiplicacion) usa: *, en vez de simbolo sigma usa: sigma, etc.
+- En vez de x (multiplicacion) usa: *, en vez de simbolo sigma usa: sigma, en vez de % usa pct.
 - Usa 2 decimales como maximo.
 - Usa abreviaciones: E[X], Var, PP, Ptarifa, Ded, sin, tend, fact, etc.
-- NO uses palabras largas: "=" en vez de "igual", "*" en vez de "por".
+- NO uses palabras largas en lo posible.
+- no expliques el procedimiendo
+- No hagas espacio entre lineas ni uases separadores entre lineas
 """
  
 TEMAS = {
