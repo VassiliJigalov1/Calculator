@@ -22,10 +22,9 @@ TEMAS = {
         "ejemplo": ""
     },
     "3": {
-        "nombre": "Tablas de mortalidad y probabilidades de vida",
+        "nombre": "Resuelve el ejercicio con menor numero",
         "ejemplo": (
-            "Ejemplo: Dado que la probabilidad de muerte entre 40 y 41 anos es q_40=0.003, "
-            "calcula la probabilidad de que una persona de 40 anos sobreviva 2 anos mas."
+            "si ves dos ejercicios y uno dice ejercicio 2 y otro ejercicio 4 resluelve el 2"
         )
     },
     "4": {
