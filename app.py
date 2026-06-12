@@ -39,17 +39,9 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     mensaje = client.messages.create(
         model="claude-opus-4-8",
         max_tokens=16000,
-        thinking={
-            "type": "enabled",
-            "budget_tokens": 8000
-        },
         messages=[{"role": "user", "content": content}]
     )
-
-    for bloque in mensaje.content:
-        if bloque.type == "text":
-            return bloque.text
-    return ""
+    return mensaje.content[0].text
  
  
 @app.route("/foto", methods=["POST"])
@@ -169,10 +161,6 @@ def index():
         f"<p>{resultado_link}</p>"
         f"<p>{paginas_link}</p>"
     )
- 
- 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
  
  
 if __name__ == "__main__":
