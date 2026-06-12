@@ -52,10 +52,9 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     content.append({"type": "text", "text": prompt})
 
     mensaje = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-fable-5",
         max_tokens=8000,
-        thinking={"type": "adaptive"},
-        extra_body={"effort": "high"},
+        effort="high",
         messages=[{"role": "user", "content": content}]
     )
 
