@@ -19,8 +19,7 @@ TEMAS = {
     },
     "2": {
         "nombre": "Sigue la resolucion del ejercicio con explicaciones breves",
-        "ejemplo""
-        )
+        "ejemplo": ""
     },
     "3": {
         "nombre": "Tablas de mortalidad y probabilidades de vida",
@@ -32,12 +31,10 @@ TEMAS = {
     "4": {
         "nombre": "Teorico",
         "ejemplo": ""
-        )
     },
     "5": {
         "nombre": "Tema libre con explicacion breve",
         "ejemplo": ""
-        )
     },
     "6": {
         "nombre": "Tema libre",
