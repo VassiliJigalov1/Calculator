@@ -54,7 +54,6 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     mensaje = client.messages.create(
         model="claude-fable-5",
         max_tokens=8000,
-        effort="high",
         messages=[{"role": "user", "content": content}]
     )
 
