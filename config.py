@@ -15,12 +15,8 @@ REGLAS DE FORMATO:
  
 TEMAS = {
     "1": {
-        "nombre": "Interes compuesto y valor del dinero en el tiempo",
-        "ejemplo": (
-            "Ejemplo: Un capital de $10.000 se invierte al 8% anual durante 5 anos. "
-            "Cual es el monto final con capitalizacion anual? "
-            "Mostra la formula M = C(1+i)^n y el resultado."
-        )
+        "nombre": "Foto pixelada",
+        "ejemplo": ""
     },
     "2": {
         "nombre": "Anualidades y rentas",
