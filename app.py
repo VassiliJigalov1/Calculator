@@ -16,7 +16,13 @@ def parsear_paginas(texto):
     """Extrae el contenido de cada bloque ```...``` y devuelve una lista de strings."""
     patron = r'```([\s\S]*?)```'
     paginas = re.findall(patron, texto)
-    return [p.strip() for p in paginas if p.strip()]
+    resultado = []
+    for p in paginas:
+        # filtrar lineas vacias
+        lineas = [l for l in p.split('\n') if l.strip() != '']
+        if lineas:
+            resultado.append('\n'.join(lineas))
+    return resultado
  
  
 def analizar_imagenes(fotos_bytes, tema_key=None):
