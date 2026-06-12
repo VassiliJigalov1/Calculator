@@ -1,4 +1,4 @@
 flask
-anthropic
+anthropic>=0.70.0
 gunicorn
 pillow
