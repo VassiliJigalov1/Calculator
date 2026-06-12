@@ -8,7 +8,7 @@ REGLAS DE FORMATO:
 - Usa 2 decimales como maximo.
 - Usa abreviaciones: E[X], Var, PP, Ptarifa, Ded, sin, tend, fact, etc.
 - NO uses palabras largas en lo posible.
-- no expliques el procedimiendo
+- no expliques el procedimiendo, excepto en "Sigue la resolucion del ejercicio con explicaciones breves" , "Tema libre con explicacion breve", "Teorico"
 - No hagas espacio entre lineas ni uases separadores entre lineas
 """
  
@@ -18,11 +18,8 @@ TEMAS = {
         "ejemplo": ""
     },
     "2": {
-        "nombre": "Anualidades y rentas",
-        "ejemplo": (
-            "Ejemplo: Se depositan $500 al final de cada mes durante 3 anos "
-            "con una tasa del 6% anual convertible mensualmente. "
-            "Calcula el valor futuro de la anualidad."
+        "nombre": "Sigue la resolucion del ejercicio con explicaciones breves",
+        "ejemplo""
         )
     },
     "3": {
@@ -33,19 +30,13 @@ TEMAS = {
         )
     },
     "4": {
-        "nombre": "Seguros de vida y valores actuariales",
-        "ejemplo": (
-            "Ejemplo: Calcula el valor presente neto actuarial de un seguro de vida "
-            "que paga $100.000 al fallecimiento, para una persona de 35 anos, "
-            "usando una tasa de interes del 5% y la tabla de mortalidad dada."
+        "nombre": "Teorico",
+        "ejemplo": ""
         )
     },
     "5": {
-        "nombre": "",
-        "ejemplo": (
-            "Ejemplo: Calcula la prima nivelada anual para un seguro de vida entera "
-            "emitido a una persona de 30 anos, con suma asegurada de $50.000, "
-            "tasa de interes 4% y tabla de mortalidad estandar."
+        "nombre": "Tema libre con explicacion breve",
+        "ejemplo": ""
         )
     },
     "6": {
