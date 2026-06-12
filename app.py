@@ -3,6 +3,8 @@ import anthropic
 import base64
 import re
 import os
+from PIL import Image
+import io
 from config import TEMAS, PROMPT_CALCULADORA
  
 app = Flask(__name__)
@@ -10,8 +12,27 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
  
 sesiones = {}
 ultima_foto_bytes = None
- 
- 
+
+
+def pixelar_imagen(foto_bytes):
+    """Convierte una foto a arte ASCII de 16x7 caracteres."""
+    img = Image.open(io.BytesIO(foto_bytes))
+    img = img.resize((16, 7))
+    img = img.convert("L")  # escala de grises
+
+    chars = " .:-=+*#%@"  # de claro a oscuro
+    lineas = []
+    for y in range(7):
+        linea = ""
+        for x in range(16):
+            pixel = img.getpixel((x, y))
+            linea += chars[pixel * (len(chars) - 1) // 255]
+        lineas.append(linea)
+
+    bloque = "\n".join(lineas)
+    return f"```\n{bloque}\n```"
+
+
 def parsear_paginas(texto):
     """Extrae el contenido de cada bloque ```...``` y devuelve una lista de strings."""
     patron = r'```([\s\S]*?)```'
@@ -49,7 +70,8 @@ def recibir_foto():
     global ultima_foto_bytes
  
     content_type = request.headers.get("Content-Type", "")
- 
+    tema_key = request.headers.get("X-Tema", None)
+
     if "multipart/form-data" in content_type:
         foto1 = request.files.get("foto1")
         foto2 = request.files.get("foto2")
@@ -62,8 +84,24 @@ def recibir_foto():
         bytes2 = foto2.read()
         bytes3 = foto3.read()
         ultima_foto_bytes = bytes3
-        tema_key = request.headers.get("X-Tema", None)
- 
+
+        # Tema 1: pixelar la ultima foto sin llamar a Claude
+        if tema_key == "1":
+            try:
+                resultado_raw = pixelar_imagen(bytes3)
+                paginas = parsear_paginas(resultado_raw)
+                sesiones["esp32"] = {
+                    "ultimo_resultado": resultado_raw,
+                    "paginas": paginas
+                }
+                return jsonify({
+                    "texto": resultado_raw,
+                    "paginas": paginas,
+                    "total_paginas": len(paginas)
+                }), 200
+            except Exception as e:
+                return jsonify({"error": str(e)}), 500
+
         try:
             resultado_raw = analizar_imagenes([bytes1, bytes2, bytes3], tema_key)
             paginas = parsear_paginas(resultado_raw)
@@ -84,8 +122,24 @@ def recibir_foto():
             return jsonify({"error": "Sin datos"}), 400
  
         ultima_foto_bytes = request.data
-        tema_key = request.headers.get("X-Tema", None)
- 
+
+        # Tema 1: pixelar sin llamar a Claude
+        if tema_key == "1":
+            try:
+                resultado_raw = pixelar_imagen(request.data)
+                paginas = parsear_paginas(resultado_raw)
+                sesiones["esp32"] = {
+                    "ultimo_resultado": resultado_raw,
+                    "paginas": paginas
+                }
+                return jsonify({
+                    "texto": resultado_raw,
+                    "paginas": paginas,
+                    "total_paginas": len(paginas)
+                }), 200
+            except Exception as e:
+                return jsonify({"error": str(e)}), 500
+
         try:
             resultado_raw = analizar_imagenes([request.data], tema_key)
             paginas = parsear_paginas(resultado_raw)
