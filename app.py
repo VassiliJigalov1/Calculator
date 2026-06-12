@@ -55,7 +55,7 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
         model="claude-opus-4-8",
         max_tokens=32000,
         thinking={"type": "adaptive"},
-        effort="max",
+        effort="high",
         messages=[{"role": "user", "content": content}]
     )
 
