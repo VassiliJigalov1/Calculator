@@ -15,7 +15,7 @@ REGLAS DE FORMATO:
  
 TEMAS = {
     "1": {
-        "nombre": "Foto pixelada",
+        "nombre": "Sigue la resolucion del ejercicio",
         "ejemplo": ""
     },
     "2": {
