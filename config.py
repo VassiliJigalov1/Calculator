@@ -22,7 +22,7 @@ TEMAS = {
         "ejemplo": ""
     },
 "3": {
-        "nombre": "Tarificacion",
+        "nombre": "Resuelve teniendo en cuenta la siguiente teoria para el razonamiento y procedimiento",
         "ejemplo": (
             """ # Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
 
