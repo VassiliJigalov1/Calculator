@@ -637,7 +637,7 @@ Aplicacion practica: si una gran proporcion de expuestos de ciertas zonas (ej. '
         "ejemplo": ""
     },
     "6": {
-        "nombre": "Tema libre",
+        "nombre": "Resuelve",
         "ejemplo": ""
     }
 }
