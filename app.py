@@ -6,7 +6,12 @@ import os
 from config import TEMAS, PROMPT_CALCULADORA
 
 app = Flask(__name__)
-client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+client = anthropic.Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),
+    default_headers={
+        "anthropic-beta": "interleaved-thinking-2025-05-14,output-config-2025-05-14"
+    }
+)
 
 sesiones = {}
 ultima_foto_bytes = None
