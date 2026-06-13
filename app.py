@@ -54,7 +54,7 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     mensaje = client.messages.create(
         model="claude-opus-4-8",
         max_tokens=16000,
-        output_config={"effort": "max"},
+        output_config={"effort": "high"},
         thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": content}]
     )
