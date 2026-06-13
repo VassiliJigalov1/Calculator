@@ -54,10 +54,11 @@ def analizar_imagenes(fotos_bytes, tema_key=None):
     mensaje = client.messages.create(
         model="claude-opus-4-8",
         max_tokens=16000,
+        output_config={"effort": "max"},
+        thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": content}]
     )
 
-    # Concatena todos los bloques de tipo "text" de la respuesta
     textos = [block.text for block in mensaje.content if block.type == "text"]
     return "\n".join(textos)
 
