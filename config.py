@@ -19,7 +19,7 @@ TEMAS = {
     },
     "2": {
         "nombre": "resuelve el siguiente ejercicio de ART(argentina)",
-        "ejemplo": "RESUMEN ART - GUÍA PARA EJERCICIOS
+        "ejemplo":  """(RESUMEN ART - GUÍA PARA EJERCICIOS
 PARTE I: PRESTACIONES Y COTIZACIÓN
 1. Conceptos Base
 Hojas
@@ -168,7 +168,7 @@ Calcular IBM / IBD con RIPTE si es necesario
 Determinar edad x a la 1ª manifestación invalidante
 Aplicar Máx{} entre fórmula actuarial y monto fijo (M₁, M₂, M₃, M₄)
 Reservas: ¿SLAP? ¿IBNR? ¿PE (caso a caso vs global)? ¿ILT (A1, A2 vs global)? ¿SPL? ¿Juicios?
-Verificar siempre: Si la reserva da negativa → 0"
+Verificar siempre: Si la reserva da negativa → 0'''
     },
 "3": {
         "nombre": "Resuelve teniendo en cuenta la siguiente teoria para el razonamiento y procedimiento",
