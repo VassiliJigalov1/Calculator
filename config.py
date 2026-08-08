@@ -19,7 +19,7 @@ TEMAS = {
     },
     "2": {
         "nombre": "resuelve el siguiente ejercicio de ART(argentina)",
-        "ejemplo":  '''(RESUMEN ART - GUÍA PARA EJERCICIOS
+        "ejemplo":  """(RESUMEN ART - GUÍA PARA EJERCICIOS
 PARTE I: PRESTACIONES Y COTIZACIÓN
 1. Conceptos Base
 Hojas
@@ -168,12 +168,12 @@ Calcular IBM / IBD con RIPTE si es necesario
 Determinar edad x a la 1ª manifestación invalidante
 Aplicar Máx{} entre fórmula actuarial y monto fijo (M₁, M₂, M₃, M₄)
 Reservas: ¿SLAP? ¿IBNR? ¿PE (caso a caso vs global)? ¿ILT (A1, A2 vs global)? ¿SPL? ¿Juicios?
-Verificar siempre: Si la reserva da negativa → 0''',
+Verificar siempre: Si la reserva da negativa → 0""",
     },
 "3": {
         "nombre": "Resuelve teniendo en cuenta la siguiente teoria para el razonamiento y procedimiento",
         "ejemplo": 
-            ''' Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
+            """ Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
 
 ## UNIDAD 6: TARIFICACIÓN (RATEMAKING)
 
@@ -423,7 +423,7 @@ donde Uer = Unidades expuestas a riesgo.
     },
     "4": {
         "nombre": "Teorico",
-        "ejemplo": '''a continuacion te paso el teorico que vimos en clase: 1. Por que los GLM son utiles en Predictive Analytics?
+        "ejemplo": """a continuacion te paso el teorico que vimos en clase: 1. Por que los GLM son utiles en Predictive Analytics?
 
 Los GLM permiten construir tarifas segmentadas segun las caracteristicas del asegurado o del riesgo a suscribir. Sus principales ventajas son:
 
@@ -778,7 +778,7 @@ Negocios actualmente rentables.
 Negocios actualmente NO rentables.
 
 El grafico de impactos puede segmentarse por categorias de una variable particular (ej. por localidad), lo que permite identificar que categorias son rentables y cuales no, considerando el efecto combinado de todas las variables y las nuevas relatividades.
-Aplicacion practica: si una gran proporcion de expuestos de ciertas zonas (ej. 'Resto Sur' y 'Buenos Aires') experimentaria fuertes alzas, esto permite repensar el suavizado de ciertas variables para atenuar el impacto del cambio de tarifa, o aplicarlo en dos o mas etapas (implementacion gradual).''',
+Aplicacion practica: si una gran proporcion de expuestos de ciertas zonas (ej. 'Resto Sur' y 'Buenos Aires') experimentaria fuertes alzas, esto permite repensar el suavizado de ciertas variables para atenuar el impacto del cambio de tarifa, o aplicarlo en dos o mas etapas (implementacion gradual).""",
     },
     "5": {
         "nombre": "Tema libre con explicacion breve",
