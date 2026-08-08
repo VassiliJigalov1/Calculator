@@ -19,7 +19,7 @@ TEMAS = {
     },
     "2": {
         "nombre": "resuelve el siguiente ejercicio de ART(argentina)",
-        "ejemplo":  """(RESUMEN ART - GUÍA PARA EJERCICIOS
+        "ejemplo":  '''(RESUMEN ART - GUÍA PARA EJERCICIOS
 PARTE I: PRESTACIONES Y COTIZACIÓN
 1. Conceptos Base
 Hojas
