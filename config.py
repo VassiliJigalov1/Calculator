@@ -173,7 +173,7 @@ Verificar siempre: Si la reserva da negativa → 0'''
 "3": {
         "nombre": "Resuelve teniendo en cuenta la siguiente teoria para el razonamiento y procedimiento",
         "ejemplo": (
-            """ # Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
+            ''' Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
 
 ## UNIDAD 6: TARIFICACIÓN (RATEMAKING)
 
