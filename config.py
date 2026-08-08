@@ -2,7 +2,7 @@ from pathlib import Path
 from functools import lru_cache
 
 BASE_DIR = Path(__file__).parent
-PROMPTS_DIR = BASE_DIR / "prompts"
+PROMPTS_DIR = BASE_DIR
 
 @lru_cache(maxsize=None)
 def _cargar(nombre: str) -> str:
