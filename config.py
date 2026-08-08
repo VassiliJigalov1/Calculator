@@ -172,7 +172,7 @@ Verificar siempre: Si la reserva da negativa → 0'''
     },
 "3": {
         "nombre": "Resuelve teniendo en cuenta la siguiente teoria para el razonamiento y procedimiento",
-        "ejemplo": (
+        "ejemplo": 
             ''' Resumen Tarificación — Fórmulas y Razonamiento para el Parcial
 
 ## UNIDAD 6: TARIFICACIÓN (RATEMAKING)
@@ -420,7 +420,6 @@ donde Uer = Unidades expuestas a riesgo.
 5. Armar % Siniestralidad o Prima de Tarifa con todos los componentes.
 6. Si hay segmentación: definir base, calcular relatividades (razón siniestral o costo siniestral según corresponda), verificar si hace falta factor off-balance/compensación.
 """
-        )
     },
     "4": {
         "nombre": "Teorico",
